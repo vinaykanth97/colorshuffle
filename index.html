@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            max-width: 80%;
+        }
+
+        .box {
+            height: 100px;
+            list-style: none;
+            width: 100px;
+            float: left;
+            margin: 20px;
+            width: calc(80%/4);
+        }
+
+        .coral {
+            background: coral;
+        }
+
+        .blue {
+            background: blue;
+        }
+
+        .black {
+            background: #000;
+        }
+
+        .yellow {
+            background: yellow;
+        }
+
+        .orange {
+            background: orange;
+        }
+
+        .pink {
+            background: pink;
+        }
+
+        .grey {
+            background: #cccccc;
+        }
+
+        .gold {
+            background: goldenrod;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li class="box coral" id="coral"></li>
+        <li class="box blue" id="blue"></li>
+        <li class="box black" id="black"></li>
+        <li class="box yellow" id="yellow"></li>
+        <li class="box orange" id="orange"></li>
+        <li class="box pink" id="pink"></li>
+        <li class="box grey" id="grey"></li>
+        <li class="box gold" id="gold"></li>
+    </ul>
+    <script src="./jquery.js"></script>
+    <script>
+        let colors = ["coral", "blue", "black", "yellow", "orange", "pink", "grey", "gold"]
+        // var i = 0;
+        let emptArray = []
+        var clicks = 0;
+        $('.box').click(function (event) {
+            if ($(this).parent().data("lastClicked")) {
+                // alert($(this).parent().data("lastClicked"));
+                //  console.log($(this).parent().data("lastClicked")) 
+
+                var PrevData = $(this).parent().data("lastClicked")
+                $(this).removeClass('coral blue black yellow orange pink grey gold')
+                $('#' + PrevData).removeClass('coral blue black yellow orange pink grey gold')
+                $(this).removeClass(this.id)
+                $('#' + PrevData).removeClass(PrevData)
+                $(this).addClass(PrevData)
+                $('#' + PrevData).addClass(this.id)
+                console.log(PrevData)
+                $(this).parent().data("lastClicked")
+            }
+            $(this).parent().data("lastClicked", this.id);
+            if (clicks == 0) {
+                var ff = this.id
+                emptArray.push(ff)
+            } else {
+                $(this).removeClass('coral blue black yellow orange pink grey gold')
+                // $('.box').removeClass('coral blue black yellow orange pink grey gold')
+                this.classList.add(emptArray[0])
+            }
+            ++clicks;
+        });
+
+    </script>
+</body>
+
+</html>
